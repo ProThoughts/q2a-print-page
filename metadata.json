@@ -1,0 +1,12 @@
+{
+	"name": "Q2A AMP",
+	"uri": "https://github.com/yshiga/q2a-print-page",
+	"description": "Provide a page for printing on Q2A site",
+	"version": "1.0.0",
+	"date": "2018-05-30",
+	"author": "yshiga",
+	"author_uri": "http://38qa.net",
+	"license": "GPLv2",
+	"update_uri": "",
+	"min_q2a": "1.7"
+}
