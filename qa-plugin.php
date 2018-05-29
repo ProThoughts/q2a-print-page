@@ -26,7 +26,7 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 // Phrases
 
 // Page
-
+qa_register_plugin_module('page', 'qa-print-page.php', 'qa_print_page', 'Print Page');
 // layer
 
 /*
