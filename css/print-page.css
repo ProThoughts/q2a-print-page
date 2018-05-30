@@ -1,0 +1,45 @@
+h1 {
+    margin: 12px 0;
+}
+p {
+    margin: 0 0 8px;
+}
+.print-notice {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+.question-single {
+    background: #fff;
+    width: 100%;
+}
+.question-single .section-inner {
+    max-width: 730px;
+    margin: 0 auto;
+}
+.qa-template-print .question-single .mdl-layout-title {
+    font-size: 220%;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.qa-template-print .question-single .mdl-layout-title .mdl-cell {
+    width: unset;
+}
+.qa-template-print .question-single .section-inner .entry-content {
+    font-size: 130%;
+    line-height: 1;
+}
+.qa-template-print .question-single .section-inner .entry-content p {
+    font-size: 100%;
+    line-height: 1.2;
+}
+.qa-template-print .profile .meta-who-data {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: rgb(255, 110, 64);
+}
+.medium-insert-images .image-url {
+    display: none;
+}
+.medium-insert-images, .mediumInsert {
+    margin: 1em 0;
+}
