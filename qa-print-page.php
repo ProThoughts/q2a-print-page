@@ -5,7 +5,7 @@
         exit;
     }
 
-    class qa_amp_page
+    class qa_print_page
     {
 
         private $directory;
