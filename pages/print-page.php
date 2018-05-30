@@ -5,6 +5,7 @@
     }
 
     $qa_content = qa_content_prepare();
+    $qa_content['custom'] = 'This is Print Page for Q2A.';
 
     return $qa_content;
 
