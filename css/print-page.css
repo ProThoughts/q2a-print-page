@@ -4,6 +4,28 @@ h1 {
 p {
     margin: 0 0 8px;
 }
+.mdl-card__supporting-text {
+    color: rgba(0,0,0,.54);
+    font-size: 1rem;
+    line-height: 18px;
+    padding: 16px;
+    width: 90%;
+}
+.mdl-chip {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    border-radius: 16px;
+    background-color: #dedede;
+    display: inline-block;
+    font-size: 0;
+    white-space: nowrap;
+}
+.mdl-chip__text {
+    font-size: 13px;
+    vertical-align: middle;
+    display: inline-block;
+}
 .print-notice {
     font-size: 1.2em;
     font-weight: 600;
@@ -42,4 +64,10 @@ p {
 }
 .medium-insert-images, .mediumInsert {
     margin: 1em 0;
+}
+.mdl-chip.cat-bg-brown {
+    background-color: #6d4c41;
+}
+.mdl-chip.cat-color-white {
+    color: white;
 }
