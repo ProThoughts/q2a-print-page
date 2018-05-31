@@ -50,6 +50,13 @@ class qa_html_theme_layer extends qa_html_theme_base
             $this->page_title_error();
             $this->main_parts($this->content);
 
+            $this->output(
+                '</div><!-- END mdl-cell--12-col -->',
+                '</div> <!-- END mdl-grid -->'
+            );
+
+            $this->output('</div><!-- END mdl-card__supporting-text -->');
+
             print_page_html_builder::main_bottom();
             
             $this->output('</main>');
@@ -91,6 +98,23 @@ class qa_html_theme_layer extends qa_html_theme_base
             print_page_html_builder::q_view_main($this, $q_view);
         } else {
             qa_html_theme_base::q_view_main($q_view);
+        }
+    }
+
+    public function q_view_content($q_view)
+    {
+        if ($this->template === 'print') {
+            if (isset($q_view['content'])) {
+                $content = $q_view['content'];
+                $content = print_page_html_builder::replace_youtube($content);
+            } else {
+                $content = '';
+            }
+            $this->output('<div class="qa-q-view-content">');
+            $this->output_raw($content);
+            $this->output('</div>');
+        } else {
+            qa_html_theme_base::q_view_content($q_view);
         }
     }
 

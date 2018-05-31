@@ -183,4 +183,13 @@ class print_page_html_builder
         $theme_obj->output('</div> <!-- END qa-a-item-main -->');
     }
 
+    public static function replace_youtube($content)
+    {
+        $regex = '/<a href="[^"]*(youtube|youtu\.be)[^"]*"[^>]*>([^<]*)<\/a>/i';
+        
+        $replace = 'Youtube動画: $2';
+        $res = preg_replace($regex, $replace, $content);
+        return $res;
+    }
+
 }
