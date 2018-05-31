@@ -33,6 +33,51 @@ class print_page_html_builder
         include $template_path;
     }
 
+    public static function title($theme_obj)
+    {
+        $q_view = @$theme_obj->content['q_view'];
+        $title = str_replace('<span', '<div', $theme_obj->content['title']);
+        $title = str_replace('</span>', '</div>', $title);
+        $category_class = qa_theme_utils::get_category_class($q_view['raw']['categoryname']);
+        $theme_obj->output(
+            '<div class="mdl-chip mdl-cell--4-col-phone mdl-cell mdl-typography--text-center '.$category_class.'">',
+            '<span class="mdl-chip__text mdl-color-text--white">',
+            $q_view['raw']['categoryname'],
+            '</span>',
+            '</div>'
+        );
+        $title = str_replace('　','&nbsp;',$title);
+        $theme_obj->output('<div>'.$title. '</div>');
+    }
+
+    public static function q_view_main($theme_obj, $q_view)
+    {
+        $theme_obj->output('<div class="qa-q-view-main">');
+
+        $theme_obj->output('<div class="mdl-navigation flex-style">');
+        $theme_obj->post_avatar_meta($q_view, 'qa-q-view');
+        $theme_obj->output('</div>');
+        $suffix=isset($q_view['when']['suffix']) ? $q_view['when']['suffix'] : '';
+        $theme_obj->output('<div class="mdl-color-text--grey-400 margin--bottom-16px margin--top-16px">');
+        $theme_obj->output(qa_lang_html('material_lite_lang/post_date'));
+        $theme_obj->output($q_view['when']['data'].$suffix);
+        $theme_obj->output(',  ');
+        $theme_obj->view_count($q_view);
+        $theme_obj->output('</div>');
+        $theme_obj->q_view_content($q_view);
+        $theme_obj->q_view_extra($q_view);
+        $theme_obj->q_view_follows($q_view);
+        $theme_obj->q_view_closed($q_view);
+        $theme_obj->post_tags($q_view, 'qa-q-view');
+
+        if (count($q_view['c_list']['cs']) > 0) {
+            $theme_obj->c_list(@$q_view['c_list'], 'qa-q-view');
+        }
+
+        $theme_obj->output('</div> <!-- END qa-q-view-main -->');
+
+    }
+
     public static function post_avatar_meta($theme_obj, $post, $class, $avatarprefix = null, $metaprefix = null, $metaseparator = '<br/>')
     {
         if($class === "qa-q-item") {
@@ -94,6 +139,48 @@ class print_page_html_builder
         $theme_obj->output('<span class="mdl-chip__text"><span class="mdl-typography--font-bold">'.qa_lang_html('material_lite_lang/user_location').'</span>：'.$location.'</span>');
         $theme_obj->output('</div>');
         $theme_obj->output('</div>');
+    }
+
+    public static function a_item_main($theme_obj, $a_item)
+    {
+        $theme_obj->output('<div class="qa-a-item-main mdl-card__supporting-text">');
+
+
+        if ($a_item['hidden']) {
+            $theme_obj->output('<div class="qa-a-item-hidden">');
+        }
+        $theme_obj->error(@$a_item['error']);
+
+        //要素が横並びになるようにflexスタイルを適用
+        $theme_obj->output('<div class="flex-style">');
+        $theme_obj->post_avatar_meta($a_item, 'qa-a-item');
+        $theme_obj->output('</div><!-- END flex-style -->');
+        //flexスタイルここまで
+        $suffix = isset($a_item['when']['suffix']) ? $a_item['when']['suffix'] : '';
+        $theme_obj->output('<div class="mdl-color-text--grey-400 margin--bottom-16px margin--top-16px">'. qa_lang_html('material_lite_lang/post_date') . $a_item['when']['data']. $suffix);
+
+        if(isset($a_item['flags'])) {
+            $theme_obj->output(', ' . $a_item['flags']['prefix'] . $a_item['flags']['data'] . $a_item['flags']['suffix']);
+        }
+
+        $theme_obj->output('</div>');
+        $theme_obj->a_item_content($a_item);
+
+        if ($a_item['hidden']) {
+            $theme_obj->output('</div>');
+        }
+
+
+        if (count($a_item['c_list']['cs']) > 0) {
+            $theme_obj->output('<div class="comment-wrap">');
+            $theme_obj->c_list(@$a_item['c_list'], 'qa-a-item');
+
+            // c_formに回答のIDを追加
+            @$a_item['c_form']['parentid'] = $a_item['raw']['postid'];
+
+            $theme_obj->output('</div><!-- END comment-wrap -->');
+        }
+        $theme_obj->output('</div> <!-- END qa-a-item-main -->');
     }
 
 }

@@ -75,15 +75,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function title() {
         if ($this->template === 'print') {
-            $this->output(
-                '<div class="mdl-chip mdl-cell mdl-color--primary">',
-                '<span class="mdl-chip__text mdl-color-text--white">',
-                @$this->content['q_view']['raw']['categoryname'],
-                '</span>',
-                '</div>'
-            );
-            $title = str_replace('　','&nbsp;',$this->content['title']);
-            $this->output('<div>'.$title. '</div>');
+            print_page_html_builder::title($this);
         } else {
             qa_html_theme_base::title();
         }
@@ -92,30 +84,7 @@ class qa_html_theme_layer extends qa_html_theme_base
     public function q_view_main($q_view)
     {
         if ($this->template === 'print') {
-            
-            $this->output('<div class="qa-q-view-main">');
-
-            $this->output('<div class="mdl-navigation flex-style">');
-            $this->post_avatar_meta($q_view, 'qa-q-view');
-            $this->output('</div>');
-            $suffix=isset($q_view['when']['suffix']) ? $q_view['when']['suffix'] : '';
-            $this->output('<div class="mdl-color-text--grey-400 margin--bottom-16px margin--top-16px">');
-            $this->output(qa_lang_html('material_lite_lang/post_date'));
-            $this->output($q_view['when']['data'].$suffix);
-            $this->output(',  ');
-            $this->view_count($q_view);
-            $this->output('</div>');
-            $this->q_view_content($q_view);
-            $this->q_view_extra($q_view);
-            $this->q_view_follows($q_view);
-            $this->q_view_closed($q_view);
-            $this->post_tags($q_view, 'qa-q-view');
-
-            if (count($q_view['c_list']['cs']) > 0) {
-                $this->c_list(@$q_view['c_list'], 'qa-q-view');
-            }
-
-            $this->output('</div> <!-- END qa-q-view-main -->');
+            print_page_html_builder::q_view_main($this, $q_view);
         } else {
             qa_html_theme_base::q_view_main($q_view);
         }
@@ -156,6 +125,29 @@ class qa_html_theme_layer extends qa_html_theme_base
     {
         if ($this->template !== 'print') {
             qa_html_theme_base::post_tags($post, $class);
+        }
+    }
+
+    public function a_form($a_form)
+    {
+        if ($this->template !== 'print') {
+            qa_html_theme_base::a_form($a_form);
+        }
+    }
+
+    public function c_form($c_form)
+    {
+        if ($this->template !== 'print') {
+            qa_html_theme_base::c_form($c_form);
+        }
+    }
+
+    public function a_item_main($a_item)
+    {
+        if ($this->template === 'print') {
+            print_page_html_builder::a_item_main($this, $a_item);
+        } else {
+            qa_html_theme_base::a_item_main($a_item);
         }
     }
 
