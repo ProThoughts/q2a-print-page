@@ -54,6 +54,10 @@ class qa_html_theme_layer extends qa_html_theme_base
             
             $this->output('</main>');
 
+            if(!$this->mdl_is_android_app()) {
+                print_page_html_builder::footer();
+            }
+
             $this->output('</div> <!-- END mdl-layout__content -->', '');
 
         } else {

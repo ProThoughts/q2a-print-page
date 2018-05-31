@@ -7,6 +7,16 @@ p {
 audio, canvas, iframe, img, svg, video {
     vertical-align: middle;
 }
+footer {
+    margin-top: 0;
+}
+.mdl-color--brown-700 {
+    background-color: #5d4037!important;
+}
+.mdl-mega-footer {
+    padding: 16px 40px;
+    color: #9e9e9e;
+}
 .mdl-typography--title-color-contrast {
     opacity: .87;
 }
@@ -113,4 +123,8 @@ audio, canvas, iframe, img, svg, video {
 }
 .qa-template-print .answer:last-child {
   border-bottom: none;
+}
+.mdl-mega-footer--bottom-section {
+    max-width: 730px;
+    margin: auto;
 }
