@@ -192,4 +192,28 @@ class qa_html_theme_layer extends qa_html_theme_base
             qa_html_theme_base::c_item_buttons($c_item);
         }
     }
+
+    public function a_item_content($a_item)
+    {
+        if ($this->template === 'print') {
+            $content = print_page_html_builder::replace_youtube($a_item['content']);
+            $this->output('<div class="qa-a-item-content">');
+            $this->output_raw($content);
+            $this->output('</div>');
+        } else {
+            qa_html_theme_base::a_item_content($a_item);
+        }
+    }
+
+    public function c_item_content($c_item)
+    {
+        if ($this->template === 'print') {
+            $content = print_page_html_builder::replace_youtube($c_item['content']);
+            $this->output('<div class="qa-c-item-content">');
+            $this->output_raw($content);
+            $this->output('</div>');
+        } else {
+            qa_html_theme_base::c_item_content($c_item);
+        }
+    }
 }

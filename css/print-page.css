@@ -159,5 +159,6 @@ footer {
     display: none;
 }
 .medium-insert-embeds {
-    margin: 16px 0;
+    margin: 1em 0;
+    position: relative;
 }
