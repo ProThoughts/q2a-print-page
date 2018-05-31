@@ -45,7 +45,12 @@ class qa_html_theme_layer extends qa_html_theme_base
             print_page_html_builder::main_top();
 
             // 注意書き
-            $this->output('<div class="print-notice">','ミツバチQ&A ('.qa_opt('site_url').') 印刷用ページ','</div>');
+            $notice = qa_lang_sub('print_lang/head_notice', qa_opt('site_url'));
+            $this->output(
+                '<div class="print-notice">',
+                $notice,
+                '</div>'
+            );
             
             $this->page_title_error();
             $this->main_parts($this->content);

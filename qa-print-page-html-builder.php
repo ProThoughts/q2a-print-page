@@ -186,8 +186,7 @@ class print_page_html_builder
     public static function replace_youtube($content)
     {
         $regex = '/<a href="[^"]*(youtube|youtu\.be)[^"]*"[^>]*>([^<]*)<\/a>/i';
-        
-        $replace = 'Youtube動画: $2';
+        $replace = qa_lang('print_lang/youtube_movie').'$2';
         $res = preg_replace($regex, $replace, $content);
         return $res;
     }
