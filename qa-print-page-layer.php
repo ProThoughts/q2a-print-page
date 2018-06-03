@@ -110,17 +110,12 @@ class qa_html_theme_layer extends qa_html_theme_base
     {
         if ($this->template === 'print') {
             if (isset($q_view['content'])) {
-                $content = $q_view['content'];
-                $content = print_page_html_builder::replace_youtube($content);
+                $q_view['content'] = print_page_html_builder::replace_youtube($q_view['content']);
             } else {
                 $content = '';
             }
-            $this->output('<div class="qa-q-view-content">');
-            $this->output_raw($content);
-            $this->output('</div>');
-        } else {
-            qa_html_theme_base::q_view_content($q_view);
         }
+        qa_html_theme_base::q_view_content($q_view);
     }
 
     public function avatar($item, $class, $prefix=null)
@@ -201,24 +196,16 @@ class qa_html_theme_layer extends qa_html_theme_base
     public function a_item_content($a_item)
     {
         if ($this->template === 'print') {
-            $content = print_page_html_builder::replace_youtube($a_item['content']);
-            $this->output('<div class="qa-a-item-content">');
-            $this->output_raw($content);
-            $this->output('</div>');
-        } else {
-            qa_html_theme_base::a_item_content($a_item);
+            $a_item['content'] = print_page_html_builder::replace_youtube($a_item['content']);
         }
+        qa_html_theme_base::a_item_content($a_item);
     }
 
     public function c_item_content($c_item)
     {
         if ($this->template === 'print') {
-            $content = print_page_html_builder::replace_youtube($c_item['content']);
-            $this->output('<div class="qa-c-item-content">');
-            $this->output_raw($content);
-            $this->output('</div>');
-        } else {
-            qa_html_theme_base::c_item_content($c_item);
+            $c_item['content'] = print_page_html_builder::replace_youtube($c_item['content']);
         }
+        qa_html_theme_base::c_item_content($c_item);
     }
 }
