@@ -208,4 +208,15 @@ class qa_html_theme_layer extends qa_html_theme_base
         }
         qa_html_theme_base::c_item_content($c_item);
     }
+
+    public function a_list_items($a_items)
+    {
+        if ($this->template === 'print') {
+            foreach ($a_items as $a_item) {
+                $this->a_list_item($a_item);
+            }
+        } else {
+            qa_html_theme_base::a_list_items($a_items);
+        }
+    }
 }
