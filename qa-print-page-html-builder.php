@@ -9,7 +9,7 @@ class print_page_html_builder
         $charset = $theme_obj->content['charset'];
         $site_url = qa_opt('site_url');
         $corecss = $theme_obj->rooturl.$theme_obj->css_name();
-        $customcss = PRINT_RELATIVE_PATH.'/css/print-page.css';
+        $customcss = PRINT_RELATIVE_PATH.'css/print-page.css';
         include $template_path;
     }
 
