@@ -21,13 +21,14 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 // CONSTANT value
 @define( 'PRINT_DIR', dirname( __FILE__ ) );
 @define( 'PRINT_FOLDER', basename( dirname( __FILE__ ) ) );
-@define( 'PRINT_RELATIVE_PATH', '../qa-plugin/'.AMP_FOLDER.'/');
+@define( 'PRINT_RELATIVE_PATH', '../qa-plugin/'.PRINT_FOLDER.'/');
 
 // Phrases
-
+qa_register_plugin_phrases('qa-print-page-lang-*.php', 'print_lang');
 // Page
-
+qa_register_plugin_module('page', 'qa-print-page.php', 'qa_print_page', 'Print Page');
 // layer
+qa_register_plugin_layer('qa-print-page-layer.php','Print Page Layer');
 
 /*
     Omit PHP closing tag to help avoid accidental output
