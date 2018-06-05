@@ -23,16 +23,27 @@
             $requestparts = qa_request_parts();
 
             return ( !empty( $requestparts )
-                && @$requestparts[ 0 ] === 'print'
-                && isset($requestparts[ 1 ]) 
+                && ((@$requestparts[ 0 ] === 'print'
+                && is_numeric(@$requestparts[ 1 ])) 
+                || (@$requestparts[ 0 ] === 'print'
+                && @$requestparts[ 1 ] === 'blog'
+                && is_numeric(@$requestparts[ 2 ]))) 
             );
         }
 
         public function process_request( $request )
         {
-            qa_set_template( 'print' );
+            $requestparts = qa_request_parts();
 
-            return require PRINT_DIR . '/pages/print-page.php';
+            if (@$requestparts[ 1 ] === 'blog') {
+                qa_set_template( 'print-blog' );
+
+                return require PRINT_DIR . '/pages/print-blog-page.php';
+            } else {
+                qa_set_template( 'print' );
+
+                return require PRINT_DIR . '/pages/print-page.php';
+            }
         }
     }
 

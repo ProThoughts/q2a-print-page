@@ -79,26 +79,32 @@ footer {
     max-width: 730px;
     margin: 0 auto;
 }
-.qa-template-print .question-single .mdl-layout-title {
+.qa-template-print .question-single .mdl-layout-title,
+.qa-template-print-blog .question-single .mdl-layout-title {
     font-size: 220%;
     font-weight: 700;
     line-height: 1.2;
 }
-.qa-template-print .question-single .mdl-layout-title .mdl-cell {
+.qa-template-print .question-single .mdl-layout-title .mdl-cell,
+.qa-template-print-blog .question-single .mdl-layout-title .mdl-cell {
     width: unset;
 }
-.qa-template-print .question-single .section-inner .entry-content {
+.qa-template-print .question-single .section-inner .entry-content,
+.qa-template-print-blog .question-single .section-inner .entry-content {
     font-size: 130%;
     line-height: 1;
 }
-.qa-template-print .question-single .section-inner .entry-content p {
+.qa-template-print .question-single .section-inner .entry-content p,
+.qa-template-print-blog .question-single .section-inner .entry-content p {
     font-size: 100%;
     line-height: 1.2;
 }
-.qa-template-print .question-single img {
+.qa-template-print .question-single img,
+.qa-template-print-blog .question-single img {
     max-width: 95%;
 }
-.qa-template-print .profile .meta-who-data {
+.qa-template-print .profile .meta-who-data,
+.qa-template-print-blog .profile .meta-who-data {
     font-size: 1.2em;
     font-weight: 500;
     color: rgb(255, 110, 64);
@@ -107,7 +113,8 @@ footer {
     max-width: 95%;
     max-height: 600px;
 }
-.medium-insert-images .image-url {
+.medium-insert-images .image-url,
+.image-url {
     display: none;
 }
 .medium-insert-images, .mediumInsert {
@@ -131,14 +138,16 @@ footer {
 .qa-q-item-tag-item .mdl-button.cat-bg:hover {
   opacity: 0.3;
 }
-.qa-template-print .comment-wrap {
+.qa-template-print .comment-wrap,
+.qa-template-print-blog .comment-wrap {
   border: 1px solid #e2e2e2;
   border-radius: 2px;
   padding: 16px;
   margin: 8px 0 24px;
   color: rgba(0,0,0,0.8);
 }
-.qa-template-print .comment-wrap .comment {
+.qa-template-print .comment-wrap .comment,
+.qa-template-print-blog .comment-wrap .comment {
   border-bottom: 1px solid #e2e2e2;
   margin-bottom: 16px;
 }
