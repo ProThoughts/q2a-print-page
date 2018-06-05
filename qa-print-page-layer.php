@@ -45,7 +45,7 @@ class qa_html_theme_layer extends qa_html_theme_base
             print_page_html_builder::main_top();
 
             // 注意書き
-            $notice = qa_lang_sub('print_lang/head_notice', qa_opt('site_url'));
+            $notice = qa_lang_sub('print_lang/head_notice', qa_path(qa_request_part(1), null, qa_opt('site_url')));
             $this->output(
                 '<div class="print-notice">',
                 $notice,
@@ -65,10 +65,6 @@ class qa_html_theme_layer extends qa_html_theme_base
             print_page_html_builder::main_bottom();
             
             $this->output('</main>');
-
-            if(!$this->mdl_is_android_app()) {
-                print_page_html_builder::footer();
-            }
 
             $this->output('</div> <!-- END mdl-layout__content -->', '');
 

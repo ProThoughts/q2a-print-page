@@ -40,8 +40,8 @@ class print_page_html_builder
         $title = str_replace('</span>', '</div>', $title);
         $category_class = qa_theme_utils::get_category_class($q_view['raw']['categoryname']);
         $theme_obj->output(
-            '<div class="mdl-chip mdl-cell--4-col-phone mdl-cell mdl-typography--text-center '.$category_class.'">',
-            '<span class="mdl-chip__text mdl-color-text--white">',
+            '<div class="mdl-cell--4-col-phone mdl-typography--text-center">',
+            '<span class="mdl-chip__text">',
             $q_view['raw']['categoryname'],
             '</span>',
             '</div>'
