@@ -142,7 +142,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function post_tags($post, $class)
     {
-        if ($this->is_print_page()) {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::post_tags($post, $class);
         }
     }

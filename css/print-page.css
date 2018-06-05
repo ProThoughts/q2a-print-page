@@ -113,7 +113,8 @@ footer {
     max-width: 95%;
     max-height: 600px;
 }
-.medium-insert-images .image-url {
+.medium-insert-images .image-url,
+.image-url {
     display: none;
 }
 .medium-insert-images, .mediumInsert {
