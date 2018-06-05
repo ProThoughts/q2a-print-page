@@ -11,7 +11,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function head()
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $this->output('<head>');
 
             $this->head_title();
@@ -25,7 +25,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function body_content()
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $this->output('<div class="mdl-layout__container">');
             $this->output('<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">');
             $this->main();
@@ -38,19 +38,14 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function main()
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $this->output('<div class="mdl-layout__content">');
             $this->output('<main>');
 
             print_page_html_builder::main_top();
 
             // 注意書き
-            $notice = qa_lang_sub('print_lang/head_notice', qa_path(qa_request_part(1), null, qa_opt('site_url')));
-            $this->output(
-                '<div class="print-notice">',
-                $notice,
-                '</div>'
-            );
+            print_page_html_builder::output_notice($this);
             
             $this->page_title_error();
             $this->main_parts($this->content);
@@ -74,7 +69,7 @@ class qa_html_theme_layer extends qa_html_theme_base
     }
 
     public function page_title_error() {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
 
             $this->output('<h1 class="mdl-layout-title">');
             $this->title();
@@ -86,7 +81,7 @@ class qa_html_theme_layer extends qa_html_theme_base
     }
 
     public function title() {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             print_page_html_builder::title($this);
         } else {
             qa_html_theme_base::title();
@@ -95,7 +90,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function q_view_main($q_view)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             print_page_html_builder::q_view_main($this, $q_view);
         } else {
             qa_html_theme_base::q_view_main($q_view);
@@ -104,7 +99,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function q_view_content($q_view)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             if (isset($q_view['content'])) {
                 $q_view['content'] = print_page_html_builder::replace_youtube($q_view['content']);
             } else {
@@ -116,21 +111,21 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function avatar($item, $class, $prefix=null)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::avatar($item, $class, $prefix);
         }
     }
 
     public function q_view_buttons($q_view)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::q_view_buttons($q_view);
         }
     }
 
     public function post_avatar_meta($post, $class, $avatarprefix=null, $metaprefix=null, $metaseparator='<br/>')
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             print_page_html_builder::post_avatar_meta($this, $post, $class, $avatarprefix, $metaprefix, $metaseparator);
         } else {
             qa_html_theme_base::post_avatar_meta($post, $class, $avatarprefix, $metaprefix, $metaseparator);
@@ -139,7 +134,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function post_meta_who($post, $class)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $post['who']['data'] = $post['raw']['handle'];
         }
         qa_html_theme_base::post_meta_who($post, $class);
@@ -147,28 +142,46 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function post_tags($post, $class)
     {
-        if ($this->template !== 'print') {
+        if ($this->is_print_page()) {
             qa_html_theme_base::post_tags($post, $class);
         }
     }
 
     public function a_form($a_form)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::a_form($a_form);
         }
     }
 
     public function c_form($c_form)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::c_form($c_form);
+        }
+    }
+
+    public function c_list($c_list, $class)
+    {
+        if ($this->template === 'print-blog') {
+            print_page_html_builder::c_list_blog($this, $c_list, $class);
+        } else {
+            qa_html_theme_base::c_list($c_list, $class);
+        }
+    }
+
+    public function c_list_items($c_items)
+    {
+        if ($this->template === 'print-blog') {
+            print_page_html_builder::c_list_items_blog($this, $c_items);
+        } else {
+            qa_html_theme_base::c_list_items($c_items);
         }
     }
 
     public function a_item_main($a_item)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             print_page_html_builder::a_item_main($this, $a_item);
         } else {
             qa_html_theme_base::a_item_main($a_item);
@@ -177,21 +190,21 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function a_item_buttons($a_item)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::a_item_buttons($a_item);
         }
     }
 
     public function c_item_buttons($c_item)
     {
-        if ($this->template !== 'print') {
+        if (!$this->is_print_page()) {
             qa_html_theme_base::c_item_buttons($c_item);
         }
     }
 
     public function a_item_content($a_item)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $a_item['content'] = print_page_html_builder::replace_youtube($a_item['content']);
         }
         qa_html_theme_base::a_item_content($a_item);
@@ -199,7 +212,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function c_item_content($c_item)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             $c_item['content'] = print_page_html_builder::replace_youtube($c_item['content']);
         }
         qa_html_theme_base::c_item_content($c_item);
@@ -207,12 +220,17 @@ class qa_html_theme_layer extends qa_html_theme_base
 
     public function a_list_items($a_items)
     {
-        if ($this->template === 'print') {
+        if ($this->is_print_page()) {
             foreach ($a_items as $a_item) {
                 $this->a_list_item($a_item);
             }
         } else {
             qa_html_theme_base::a_list_items($a_items);
         }
+    }
+
+    private function is_print_page()
+    {
+        return ($this->template === 'print' || $this->template === 'print-blog');
     }
 }

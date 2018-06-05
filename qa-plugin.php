@@ -22,6 +22,7 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 @define( 'PRINT_DIR', dirname( __FILE__ ) );
 @define( 'PRINT_FOLDER', basename( dirname( __FILE__ ) ) );
 @define( 'PRINT_RELATIVE_PATH', '../qa-plugin/'.PRINT_FOLDER.'/');
+@define( 'PRINT_BLOG_RELATIVE_PATH', '../../qa-plugin/'.PRINT_FOLDER.'/');
 
 // Phrases
 qa_register_plugin_phrases('qa-print-page-lang-*.php', 'print_lang');

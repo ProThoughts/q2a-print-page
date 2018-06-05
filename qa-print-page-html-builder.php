@@ -9,7 +9,11 @@ class print_page_html_builder
         $charset = $theme_obj->content['charset'];
         $site_url = qa_opt('site_url');
         $corecss = $theme_obj->rooturl.$theme_obj->css_name();
-        $customcss = PRINT_RELATIVE_PATH.'css/print-page.css';
+        if ($theme_obj->template === 'print') {
+            $customcss = PRINT_RELATIVE_PATH.'css/print-page.css';
+        } else {
+            $customcss = PRINT_BLOG_RELATIVE_PATH.'css/print-page.css';
+        }
         include $template_path;
     }
 
@@ -31,6 +35,21 @@ class print_page_html_builder
         $footer_copy = qa_lang_html('material_lite_lang/footer_copy_rights');
         $template_path = PRINT_DIR.'/html/footer.html';
         include $template_path;
+    }
+
+    public static function output_notice($theme_obj)
+    {
+        if ($theme_obj->template === 'print') {
+            $url = qa_path(qa_request_part(1), null, qa_opt('site_url'));
+        } else {
+            $url = qa_path(qa_request_part(1).'/'.qa_request_part(2), null, qa_opt('site_url'));
+        }
+        $notice = qa_lang_sub('print_lang/head_notice', $url);
+        $theme_obj->output(
+            '<div class="print-notice">',
+            $notice,
+            '</div>'
+        );
     }
 
     public static function title($theme_obj)
@@ -189,6 +208,32 @@ class print_page_html_builder
         $replace = qa_lang('print_lang/youtube_movie').'$2';
         $res = preg_replace($regex, $replace, $content);
         return $res;
+    }
+
+    public static function c_list_blog($theme_obj, $c_list, $class)
+    {
+        if (!empty($c_list)) {
+            $theme_obj->output('', '<div class="'.$class.'-c-list"'.(@$c_list['hidden'] ? ' style="display:none;"' : '').' '.@$c_list['tags'].'>');
+            $comment_count = count($c_list['cs']);
+            $theme_obj->output('<h2 class="mdl-typography--title-color-contrast mdl-typography--font-bold">');
+            $temp = qa_lang_html('material_lite_lang/comments_count');
+            $theme_obj->output(strtr($temp, array('^1' => $comment_count)));
+            $theme_obj->output('</h2>');
+            $theme_obj->c_list_items($c_list['cs']);
+        }
+    }
+
+    public static function c_list_items_blog($theme_obj, $c_items)
+    {
+        //ブログページの場合comment-wrapで囲む
+        if($theme_obj->template === 'print-blog') {
+            $theme_obj->output('<div class="comment-wrap">');
+            $theme_obj->output('<div id="blog-c-list">');
+        }
+        
+        foreach ($c_items as $c_item)
+            $theme_obj->c_list_item($c_item);
+
     }
 
 }
