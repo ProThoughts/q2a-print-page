@@ -17,6 +17,12 @@ class print_page_html_builder
         include $template_path;
     }
 
+    public static function head_script($ids, $userid)
+    {
+        $template_path = PRINT_DIR . '/html/head_script.html';
+        include $template_path;
+    }
+
     public static function main_top()
     {
         $template_path = PRINT_DIR.'/html/main_top.html';
