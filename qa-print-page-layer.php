@@ -16,10 +16,23 @@ class qa_html_theme_layer extends qa_html_theme_base
 
             $this->head_title();
             print_page_html_builder::head_print($this);
+            $this->head_script();
 
             $this->output('</head>');
         } else {
             qa_html_theme_base::head();
+        }
+    }
+
+    public function head_script()
+    {
+        if ($this->is_print_page()) {
+            $ids = array();
+            $ids['ga_id'] = qa_opt('material_lite_option_google_analytics_id');
+            $userid = qa_get_logged_in_userid();
+            print_page_html_builder::head_script($ids, $userid);
+        } else {
+            qa_html_theme_base::head_script();
         }
     }
 
