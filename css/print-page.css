@@ -67,6 +67,10 @@ footer {
     vertical-align: middle;
     display: inline-block;
 }
+.profile .mdl-chip__text {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
 .print-notice {
     font-size: 1.2em;
     font-weight: 600;
@@ -93,6 +97,7 @@ footer {
 .qa-template-print-blog .question-single .section-inner .entry-content {
     font-size: 130%;
     line-height: 1;
+    word-wrap:break-word;
 }
 .qa-template-print .question-single .section-inner .entry-content p,
 .qa-template-print-blog .question-single .section-inner .entry-content p {
@@ -105,13 +110,14 @@ footer {
 }
 .qa-template-print .profile .meta-who-data,
 .qa-template-print-blog .profile .meta-who-data {
+    margin-right: 8px;
     font-size: 1.2em;
     font-weight: 500;
     color: rgb(255, 110, 64);
 }
 .medium-insert-images img {
     max-width: 95%;
-    max-height: 600px;
+    max-height: 500px;
 }
 .medium-insert-images .image-url,
 .image-url {
