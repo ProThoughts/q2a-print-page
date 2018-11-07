@@ -50,7 +50,16 @@ class print_page_html_builder
         } else {
             $url = qa_path(qa_request_part(1).'/'.qa_request_part(2), null, qa_opt('site_url'));
         }
-        $notice = qa_lang_sub('print_lang/head_notice', $url);
+        $textparams = array(
+            qa_opt('site_title'),
+            $url
+        );
+        $symbols = array(
+            '^site_title',
+            '^site_url'
+        );
+        $notice = qa_lang_sub('print_lang/head_notice', $textparams, $symbols);
+        
         $theme_obj->output(
             '<div class="print-notice">',
             $notice,
